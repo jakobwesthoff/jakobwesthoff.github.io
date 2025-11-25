@@ -1,0 +1,19 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  href: string;
+  icon: string;
+  label: string;
+}
+
+const { href, icon, label } = Astro.props;
+---
+
+<!--
+  Social media link component with glowing hover effect.
+  Styling: .icon-glow-hover class defined in src/styles/global.css:8-18
+-->
+<a href={href} class="icon-glow-hover inline-block hover:scale-110" aria-label={label}>
+  <Icon name={icon} class="h-11 w-11" />
+</a>

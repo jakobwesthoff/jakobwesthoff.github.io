@@ -1,0 +1,146 @@
+---
+import "../styles/global.css";
+import { Image, getImage } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import avatar from "../assets/avatar.png";
+import gazeSprite from "../assets/gaze_grid.webp";
+import sloganText from "../assets/slogan-text.svg";
+import sloganArrow from "../assets/slogan-arrow.svg";
+import Avatar from "../components/Avatar";
+import SocialLink from "../components/SocialLink.astro";
+import EmailLink from "../components/EmailLink";
+
+// Social links configuration
+const socialLinks = [
+  {
+    href: "https://www.linkedin.com/in/jakobwesthoff/",
+    icon: "logos:linkedin-icon",
+    label: "LinkedIn",
+  },
+  { href: "https://www.youtube.com/c/mrjakob", icon: "logos:youtube-icon", label: "YouTube" },
+  { href: "https://github.com/jakobwesthoff", icon: "logos:github-icon", label: "GitHub" },
+  { href: "https://www.twitch.tv/mr_jakob", icon: "logos:twitch", label: "Twitch" },
+];
+
+// Optimize the avatar image at build time
+const optimizedAvatar = await getImage({
+  src: avatar,
+  width: 200,
+  height: 200,
+  format: "webp",
+  quality: 90,
+});
+
+// Optimize background avatar (blurred version)
+const backgroundAvatar = await getImage({
+  src: avatar,
+  width: 40,
+  height: 40,
+  format: "webp",
+  quality: 60,
+});
+
+// Optimize gaze sprite (11x11 grid, each cell 512x512 original -> 108x108 optimized)
+const optimizedGazeSprite = await getImage({
+  src: gazeSprite,
+  width: 1188, // 11 * 108 = 1188
+  height: 1188,
+  format: "webp",
+  quality: 85,
+});
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="Jakob Westhoff - Principal Distributed Systems Software Architect"
+    />
+    <meta name="author" content="Jakob Westhoff" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Jakob Westhoff - Principal Distributed Systems Software Architect"</title>
+    <!-- Preload critical resources -->
+    <!-- <link rel="preload" href="/favicon.svg" as="image" type="image/svg+xml" /> -->
+    <style define:vars={{ bgImage: `url(${backgroundAvatar.src})` }}>
+      body::before {
+        content: "";
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 120dvw;
+        height: 120dvh;
+        z-index: -10;
+        background-image: var(--bgImage);
+        background-size: cover;
+        background-position: center;
+        filter: blur(80px) saturate(1.3) brightness(1.1) sepia(0.3) hue-rotate(-10deg);
+      }
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -10;
+        background: linear-gradient(to bottom right, rgb(253 186 116 / 0.4), rgb(251 191 36 / 0.4));
+        mix-blend-mode: overlay;
+      }
+    </style>
+  </head>
+  <body
+    class="pt-safe-top pb-safe-bottom pl-safe-left pr-safe-right relative flex min-h-dvh items-center justify-center bg-[#F3AB27]"
+  >
+    <!-- Content -->
+    <main class="relative z-10 mt-26 mb-32 px-4 text-center">
+      <div class="relative inline-block">
+        <Avatar
+          client:load
+          src={optimizedAvatar.src}
+          width={optimizedAvatar.attributes.width}
+          height={optimizedAvatar.attributes.height}
+          alt=""
+          gazeSpriteSrc={optimizedGazeSprite.src}
+          gazeSpriteWidth={optimizedGazeSprite.attributes.width}
+          gazeSpriteHeight={optimizedGazeSprite.attributes.height}
+        />
+        <div
+          class="absolute top-0 flex translate-x-15/32 -translate-y-1/2 flex-col sm:translate-x-6/8"
+        >
+          <Image src={sloganText} alt="" class="self-start sm:self-center" />
+          <Image src={sloganArrow} alt="" class="self-end sm:self-center" />
+        </div>
+      </div>
+      <div class="animate-fade-slide-up">
+        <h1 class="mb-2 text-6xl font-bold tracking-tight text-gray-900">Jakob Westhoff</h1>
+        <p class="text-center text-lg font-light tracking-wide text-gray-700">
+          Software Architect by Day, Nerd by Night
+        </p>
+      </div>
+    </main>
+
+    <!-- Social links bar -->
+    <div class="absolute bottom-4 left-1/2 -translate-x-1/2">
+      <ul class="flex gap-6">
+        {
+          socialLinks.map((link) => (
+            <li>
+              <SocialLink href={link.href} icon={link.icon} label={link.label} />
+            </li>
+          ))
+        }
+        <li>
+          <EmailLink
+            client:load
+            encryptedData="UhY7BwABOAoZAitWJxcpJAJcLmkCNg=="
+            encodedKey="8jCuoNBbwiP9NdMFt0MTsFoWJvyK/iuJuqEEvYKQiG+aKGyhRXlbuTZNXP0tUMsbZ5yTlEOkAMCABboRQByIPj=="
+            label="Email"
+          >
+            <Icon name="logos:google-gmail" class="h-11 w-11" />
+          </EmailLink>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
