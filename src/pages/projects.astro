@@ -53,12 +53,13 @@ const projects = [
 
     <div class="flex flex-col gap-4">
       {
-        projects.map((project) => (
+        projects.map((project, index) => (
           <a
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            class="group block rounded-xl border border-white/30 bg-white/15 px-6 py-5 shadow-sm transition-all duration-200 hover:bg-white/25"
+            class="animate-fade-slide-up group block rounded-xl border border-white/30 bg-white/15 px-6 py-5 shadow-sm transition-all duration-200 hover:bg-white/25"
+            style={`animation-delay: ${index * 0.07}s`}
           >
             <div class="flex flex-col items-start justify-between gap-1 sm:flex-row sm:items-center sm:gap-4">
               <span class="text-xl font-semibold text-gray-900" style={`color: ${project.color}`}>
