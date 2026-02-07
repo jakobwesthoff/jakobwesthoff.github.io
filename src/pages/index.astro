@@ -64,7 +64,7 @@ const optimizedGazeSprite = await getImage({
     <title>Jakob Westhoff - Principal Distributed Systems Software Architect"</title>
     <!-- Preload critical resources -->
     <!-- <link rel="preload" href="/favicon.svg" as="image" type="image/svg+xml" /> -->
-    <style define:vars={{ bgImage: `url(${backgroundAvatar.src})` }}>
+    <style>
       body::before {
         content: "";
         position: fixed;
@@ -91,6 +91,7 @@ const optimizedGazeSprite = await getImage({
   </head>
   <body
     class="pt-safe-top pb-safe-bottom pl-safe-left pr-safe-right relative flex min-h-dvh items-center justify-center bg-[#F3AB27]"
+    style={`--bgImage: url(${backgroundAvatar.src})`}
   >
     <!-- Content -->
     <main class="relative z-10 mt-26 mb-32 px-4 text-center">

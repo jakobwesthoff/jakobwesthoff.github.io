@@ -50,7 +50,7 @@ const projects = [
     <meta name="author" content="Jakob Westhoff" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>Projects - Jakob Westhoff</title>
-    <style define:vars={{ bgImage: `url(${backgroundAvatar.src})` }}>
+    <style>
       body::before {
         content: "";
         position: fixed;
@@ -77,6 +77,7 @@ const projects = [
   </head>
   <body
     class="pt-safe-top pb-safe-bottom pl-safe-left pr-safe-right relative flex min-h-dvh flex-col bg-[#F3AB27]"
+    style={`--bgImage: url(${backgroundAvatar.src})`}
   >
     <!-- Back navigation -->
     <a
@@ -88,8 +89,10 @@ const projects = [
 
     <div class="relative z-10 mx-auto w-full max-w-3xl px-6 pt-20 pb-12">
       <div class="mb-12 text-center">
-        <h1 class="text-4xl font-bold text-gray-900">Projects<span class="text-gray-900/30">*</span></h1>
-        <p class="mt-2 text-base italic text-gray-900/50">*built between midnight and coffee</p>
+        <h1 class="text-4xl font-bold text-gray-900">
+          Projects<span class="text-gray-900/30">*</span>
+        </h1>
+        <p class="mt-2 text-base text-gray-900/50 italic">*built between midnight and coffee</p>
       </div>
 
       <div class="flex flex-col gap-4">
