@@ -11,6 +11,31 @@
   html, body {
     overscroll-behavior-y: none;
   }
+
+  /* Blurred background effect using the avatar image */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120dvw;
+    height: 120dvh;
+    z-index: -10;
+    background-image: var(--bgImage);
+    background-size: cover;
+    background-position: center;
+    filter: blur(80px) saturate(1.3) brightness(1.1) sepia(0.3) hue-rotate(-10deg);
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    background: linear-gradient(to bottom right, rgb(253 186 116 / 0.4), rgb(251 191 36 / 0.4));
+    mix-blend-mode: overlay;
+  }
 }
 
 @layer utilities {
