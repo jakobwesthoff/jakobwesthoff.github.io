@@ -7,9 +7,13 @@
     -webkit-user-select: none;
   }
 
-  /* Prevent overscroll bounce/rubber-band on all platforms including iOS */
-  html, body {
-    overscroll-behavior-y: none;
+  /* Allow to disable overscroll bounce/rubber-band on all platforms including iOS by setting body class */
+  body.overscroll-y-none {
+    overscroll-behavior-y: none
+  }
+
+  html:has(body.overscroll-y-none) {
+    overscroll-behavior-y: none
   }
 
   /* Blurred background effect using the avatar image */
