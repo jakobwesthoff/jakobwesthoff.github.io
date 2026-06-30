@@ -28,8 +28,10 @@ export const { getStaticPaths, GET } = await OGImageRoute({
       size: [200, 200],
     },
     font: {
-      title: { color: [17, 24, 39], weight: "Bold" },
-      description: { color: [55, 65, 81] },
+      // Sized down from the defaults (70/40) so a long title plus a
+      // search-length description both fit within the 630px card height.
+      title: { color: [17, 24, 39], weight: "Bold", size: 54 },
+      description: { color: [55, 65, 81], size: 30 },
     },
     fonts: [
       "./src/assets/fonts/inter-latin-400-normal.ttf",

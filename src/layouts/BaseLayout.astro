@@ -13,9 +13,11 @@ interface Props {
   image?: string;
   /** OpenGraph type: "website" for landing pages, "article" for content. */
   ogType?: string;
+  /** Keep this page out of search indexes (e.g. the legal imprint). */
+  noindex?: boolean;
 }
 
-const { title, description, bodyClass, image, ogType = "website" } = Astro.props;
+const { title, description, bodyClass, image, ogType = "website", noindex } = Astro.props;
 
 // The imprint is a legal obligation (§ 5 TMG), reachable from every page but
 // kept visually subordinate. We omit the link on the imprint page itself, where
@@ -80,7 +82,7 @@ const personSchema = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content={profile.name} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? "noindex, follow" : "index, follow"} />
     <meta name="theme-color" content="#F3AB27" />
     <link rel="canonical" href={canonicalURL.href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
