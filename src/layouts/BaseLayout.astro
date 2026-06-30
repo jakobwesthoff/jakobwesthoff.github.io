@@ -3,6 +3,7 @@ import "../styles/global.css";
 import { getImage } from "astro:assets";
 import avatar from "../assets/avatar.png";
 import { profile } from "../data/profile";
+import { pages } from "../data/pages";
 
 interface Props {
   title: string;
@@ -37,10 +38,26 @@ const backgroundAvatar = await getImage({
 // the `site` origin configured in astro.config.mjs.
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-// Social preview image. Until a dedicated 1200x630 card is generated, fall back
-// to a square render of the avatar. A caller-supplied `image` overrides it.
-const ogAvatar = await getImage({ src: avatar, width: 512, height: 512, format: "png" });
-const ogImageURL = new URL(image ?? ogAvatar.src, Astro.site);
+// Social preview image. Each page maps to a generated 1200x630 card at
+// /open-graph/<slug>.png (see src/pages/open-graph). A caller-supplied `image`
+// overrides it; unknown routes fall back to the homepage card.
+const slug = Astro.url.pathname.replace(/^\/+|\/+$/g, "") || "index";
+
+let ogImageSrc: string;
+let ogImageDimensions: { width: number; height: number } | undefined;
+if (image) {
+  ogImageSrc = image;
+} else {
+  const cardSlug = slug in pages ? slug : "index";
+  ogImageSrc = `/open-graph/${cardSlug}.png`;
+  ogImageDimensions = { width: 1200, height: 630 };
+}
+const ogImageURL = new URL(ogImageSrc, Astro.site);
+
+// A portrait of the person, distinct from the OG banner above. Used as the
+// schema.org Person image, where a photo is the semantically correct choice.
+const portrait = await getImage({ src: avatar, width: 512, height: 512, format: "png" });
+const portraitURL = new URL(portrait.src, Astro.site);
 
 // schema.org Person identity, emitted on every page. The social profiles double
 // as `sameAs` links so search engines can reconcile the entity across the web.
@@ -50,7 +67,7 @@ const personSchema = {
   name: profile.name,
   jobTitle: profile.jobTitle,
   url: Astro.site?.href,
-  image: ogImageURL.href,
+  image: portraitURL.href,
   sameAs: profile.social.map((link) => link.href),
 };
 ---
@@ -77,10 +94,10 @@ const personSchema = {
     <meta property="og:locale" content="en_US" />
     <meta property="og:image" content={ogImageURL.href} />
     {
-      !image && (
+      ogImageDimensions && (
         <>
-          <meta property="og:image:width" content={String(ogAvatar.attributes.width)} />
-          <meta property="og:image:height" content={String(ogAvatar.attributes.height)} />
+          <meta property="og:image:width" content={String(ogImageDimensions.width)} />
+          <meta property="og:image:height" content={String(ogImageDimensions.height)} />
         </>
       )
     }

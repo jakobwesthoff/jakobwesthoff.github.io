@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { pages } from "../data/pages";
 
 // Contact details are obfuscated against scrapers. The encrypted payloads below
 // were produced with a one-off random key (Base64 → XOR → ROT13 key encoding)
@@ -10,7 +11,11 @@ const phoneEncrypted = "GlxxeAZ9dlhDWX0aellp";
 const emailEncrypted = "WwkjN1UKMR0HHiFALgcjGg0VLX8mPQ==";
 ---
 
-<BaseLayout title="Impressum - Jakob Westhoff" description="Impressum" bodyClass="flex-col">
+<BaseLayout
+  title={pages.imprint.title}
+  description={pages.imprint.description}
+  bodyClass="flex-col"
+>
   <!-- Back navigation -->
   <a
     href="/"

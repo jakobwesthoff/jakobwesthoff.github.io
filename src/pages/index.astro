@@ -10,6 +10,7 @@ import SocialLink from "../components/SocialLink.astro";
 import EmailLink from "../components/EmailLink";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { profile } from "../data/profile";
+import { pages } from "../data/pages";
 
 // Optimize the avatar image at build time
 const optimizedAvatar = await getImage({
@@ -31,8 +32,8 @@ const optimizedGazeSprite = await getImage({
 ---
 
 <BaseLayout
-  title="Jakob Westhoff - Principal Distributed Systems Software Architect"
-  description="Jakob Westhoff - Principal Distributed Systems Software Architect"
+  title={pages.index.title}
+  description={pages.index.description}
   bodyClass="items-center justify-center overscroll-y-none"
 >
   <!-- Content -->

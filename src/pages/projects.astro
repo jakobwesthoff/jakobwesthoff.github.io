@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { pages } from "../data/pages";
 
 const projects = [
   {
@@ -49,8 +50,8 @@ const projects = [
 ---
 
 <BaseLayout
-  title="Projects - Jakob Westhoff"
-  description="Projects by Jakob Westhoff"
+  title={pages.projects.title}
+  description={pages.projects.description}
   bodyClass="flex-col"
 >
   <!-- Back navigation -->
