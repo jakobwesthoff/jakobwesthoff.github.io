@@ -1,43 +1,50 @@
-# Astro Starter Kit: Minimal
+# westhoffswelt.de
+
+Personal portfolio site of Jakob Westhoff. A minimal, performance-focused
+static site built with [Astro](https://astro.build), deployed to GitHub Pages
+at [westhoffswelt.de](https://westhoffswelt.de).
+
+## Stack
+
+- **Astro 7** — static site generation (`output: 'static'`)
+- **Preact** — islands for the few interactive components (`client:load`)
+- **Tailwind CSS v4** — via the `@tailwindcss/vite` plugin (no config file)
+- **TypeScript** — strict mode
+- **Bun** — package manager and script runner
+
+## Getting started
+
+This project uses [Bun](https://bun.sh). Install it first, then:
 
 ```sh
-npm create astro@latest -- --template minimal
+bun install      # install dependencies
+bun run dev      # dev server at http://localhost:3000
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Commands
 
-## 🚀 Project Structure
+| Command            | Action                                              |
+| :----------------- | :-------------------------------------------------- |
+| `bun install`      | Install dependencies                                |
+| `bun run dev`      | Start the dev server at `localhost:3000`            |
+| `bun run build`    | Type-check (`astro check`) and build to `./dist/`   |
+| `bun run preview`  | Preview the production build locally                |
+| `bun run lint`     | Lint with ESLint                                    |
+| `bun run prettier` | Auto-fix formatting and lint issues (`eslint --fix`)|
 
-Inside of your Astro project, you'll see the following folders and files:
+## Structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+├── assets/       # images optimized at build time (avatar, slogan SVGs)
+├── components/   # Preact islands + Astro components
+├── layouts/      # shared BaseLayout
+├── pages/        # file-based routes (index, projects, imprint)
+└── styles/       # global CSS + Tailwind imports and custom animations
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Deployment
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Building produces static files in `./dist/`, served via GitHub Pages.
+The build optimizes images, inlines small assets and critical CSS, and
+prefetches in-viewport links.
