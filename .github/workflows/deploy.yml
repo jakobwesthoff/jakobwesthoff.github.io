@@ -1,0 +1,59 @@
+name: Deploy to GitHub Pages
+
+# Build the static site with Bun and publish it to GitHub Pages directly
+# from the Actions artifact. The Pages "Source" must be set to "GitHub
+# Actions" in the repository settings for this to take effect.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Grant the token the permissions Pages deployment needs. deploy-pages
+# v5 additionally requires `actions: read` to fetch the build artifact.
+permissions:
+  contents: read
+  actions: read
+  pages: write
+  id-token: write
+
+# Allow a single in-flight deployment; newer pushes supersede queued runs.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build
+        run: bun run build
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
