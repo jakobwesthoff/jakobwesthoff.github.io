@@ -21,7 +21,20 @@ export default defineConfig({
     port: 3000
   },
 
-  integrations: [preact(), icon()],
+  integrations: [
+    preact(),
+    // astro-icon bundles every installed @iconify-json/* set in full into one
+    // virtual module unless each collection is narrowed here. Left unbounded the
+    // module reaches several MB, which overflows es-module-lexer's WASM memory in
+    // Vite 8's dev import-analysis and 500s every page that renders an icon. So
+    // we list exactly the icons used. Any new @iconify-json set must likewise be
+    // listed (even as an empty array) or it bundles fully and breaks dev again.
+    icon({
+      include: {
+        logos: ["github-icon", "google-gmail", "linkedin-icon", "twitch", "youtube-icon"],
+      },
+    }),
+  ],
 
   vite: {
     plugins: [tailwindcss()],
