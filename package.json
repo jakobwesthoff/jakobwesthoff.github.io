@@ -12,26 +12,26 @@
   },
   "dependencies": {
     "@astrojs/preact": "^4.1.3",
-    "@tailwindcss/vite": "^4.1.10",
+    "@tailwindcss/vite": "^4.3.2",
     "astro": "^5.15.8",
     "astro-icon": "^1.1.5",
-    "preact": "^10.27.2",
-    "tailwindcss": "^4.1.17"
+    "preact": "^10.29.3",
+    "tailwindcss": "^4.3.2"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.5",
-    "@iconify-json/logos": "^1.2.10",
-    "@iconify-json/simple-icons": "^1.2.58",
+    "@astrojs/check": "^0.9.9",
+    "@iconify-json/logos": "^1.2.11",
+    "@iconify-json/simple-icons": "^1.2.88",
     "@typescript-eslint/eslint-plugin": "^8.46.4",
     "@typescript-eslint/parser": "^8.46.4",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.5.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-prettier": "^5.5.4",
-    "prettier": "^3.6.2",
+    "eslint-plugin-prettier": "^5.5.6",
+    "prettier": "^3.9.4",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.7.1",
+    "prettier-plugin-tailwindcss": "^0.8.0",
     "typescript": "^5.7.2"
   }
 }
