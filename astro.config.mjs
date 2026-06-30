@@ -9,6 +9,10 @@ import icon from 'astro-icon';
 export default defineConfig({
   output: 'static',
 
+  // Deployed origin (custom domain). Enables absolute URL generation for
+  // canonical links, OpenGraph tags, sitemap, and RSS when those are added.
+  site: 'https://westhoffswelt.de',
+
   devToolbar: {
     enabled: false
   },
