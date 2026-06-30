@@ -63,6 +63,14 @@
     mask-image: radial-gradient(circle at center, black 60%, transparent 70%);
     -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 70%);
   }
+
+  /* Re-enable text selection within a region (overrides the global selection
+     lock). Used on the imprint page so visitors can copy contact details. */
+  .allow-select,
+  .allow-select * {
+    user-select: text;
+    -webkit-user-select: text;
+  }
 }
 
 @theme {
