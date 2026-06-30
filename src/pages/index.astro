@@ -9,18 +9,7 @@ import Avatar from "../components/Avatar";
 import SocialLink from "../components/SocialLink.astro";
 import EmailLink from "../components/EmailLink";
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-// Social links configuration
-const socialLinks = [
-  {
-    href: "https://www.linkedin.com/in/jakobwesthoff/",
-    icon: "logos:linkedin-icon",
-    label: "LinkedIn",
-  },
-  { href: "https://www.youtube.com/c/mrjakob", icon: "logos:youtube-icon", label: "YouTube" },
-  { href: "https://github.com/jakobwesthoff", icon: "logos:github-icon", label: "GitHub" },
-  { href: "https://www.twitch.tv/mr_jakob", icon: "logos:twitch", label: "Twitch" },
-];
+import { profile } from "../data/profile";
 
 // Optimize the avatar image at build time
 const optimizedAvatar = await getImage({
@@ -85,7 +74,7 @@ const optimizedGazeSprite = await getImage({
   <div class="absolute bottom-4 left-1/2 -translate-x-1/2">
     <ul class="flex gap-6">
       {
-        socialLinks.map((link) => (
+        profile.social.map((link) => (
           <li>
             <SocialLink href={link.href} icon={link.icon} label={link.label} />
           </li>
