@@ -32,6 +32,11 @@ export default defineConfig({
     icon({
       include: {
         logos: ["github-icon", "google-gmail", "linkedin-icon", "twitch", "youtube-icon"],
+        // Workshop-floor profile marks. Both pulled from Font Awesome so they
+        // share one visual language and inherit currentColor. crates.io reuses
+        // the solid `cube` that docs.rs uses for its crates.io links.
+        "fa6-solid": ["cube"],
+        "fa6-brands": ["github", "npm"],
       },
     }),
   ],
