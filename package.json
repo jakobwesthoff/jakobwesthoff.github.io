@@ -23,6 +23,7 @@
     "@iconify-json/fa6-brands": "^1.2.6",
     "@iconify-json/fa6-solid": "^1.2.4",
     "@iconify-json/logos": "^1.2.11",
+    "@iconify-json/simple-icons": "^1.2.89",
     "@resvg/resvg-js": "^2.6.2",
     "@typescript-eslint/eslint-plugin": "^8.62.1",
     "@typescript-eslint/parser": "^8.62.1",

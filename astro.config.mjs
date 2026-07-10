@@ -37,6 +37,10 @@ export default defineConfig({
         // the solid `cube` that docs.rs uses for its crates.io links.
         "fa6-solid": ["cube"],
         "fa6-brands": ["github", "npm"],
+        // 3D-printing profile marks. Printables ships an official brand icon in
+        // simple-icons; MakerWorld has none in any Iconify set, so it lives as a
+        // vendored local SVG under src/icons/dashboard-icons/ instead.
+        "simple-icons": ["printables"],
       },
     }),
   ],
