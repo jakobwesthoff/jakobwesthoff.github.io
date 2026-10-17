@@ -37,10 +37,11 @@ const backgroundAvatar = await getImage({
 // the `site` origin configured in astro.config.mjs.
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-// Social preview image: one hand-made card for every page, served from
-// public/og.png. Its size goes into the tags so link previews can lay it out
-// before the image has loaded.
-const ogImageURL = new URL("/og.png", Astro.site);
+// Social preview image: one hand-made card for every page. The tags point at
+// public/og.jpg (JPEG quality 90, a third of the PNG's size); public/og.png is
+// the lossless original it was made from. The size goes into the tags so link
+// previews can lay the card out before the image has loaded.
+const ogImageURL = new URL("/og.jpg", Astro.site);
 const ogImageDimensions = { width: 1280, height: 640 };
 
 // A portrait of the person, distinct from the OG banner above. Used as the
