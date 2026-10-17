@@ -24,7 +24,6 @@
     "@iconify-json/fa6-solid": "^1.2.4",
     "@iconify-json/logos": "^1.2.11",
     "@iconify-json/simple-icons": "^1.2.89",
-    "@resvg/resvg-js": "^2.6.2",
     "@typescript-eslint/eslint-plugin": "^8.62.1",
     "@typescript-eslint/parser": "^8.62.1",
     "eslint": "^10.6.0",
@@ -35,7 +34,6 @@
     "prettier": "^3.9.4",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.8.0",
-    "satori": "^0.26.0",
     "typescript": "^5.7.2"
   }
 }

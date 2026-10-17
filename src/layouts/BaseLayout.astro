@@ -3,21 +3,18 @@ import "../styles/global.css";
 import { getImage } from "astro:assets";
 import avatar from "../assets/avatar.png";
 import { profile } from "../data/profile";
-import { pages } from "../data/pages";
 
 interface Props {
   title: string;
   description: string;
   bodyClass?: string;
-  /** OpenGraph image URL. Falls back to a square render of the avatar. */
-  image?: string;
   /** OpenGraph type: "website" for landing pages, "article" for content. */
   ogType?: string;
   /** Keep this page out of search indexes (e.g. the legal imprint). */
   noindex?: boolean;
 }
 
-const { title, description, bodyClass, image, ogType = "website", noindex } = Astro.props;
+const { title, description, bodyClass, ogType = "website", noindex } = Astro.props;
 
 // The imprint is a legal obligation (§ 5 TMG), reachable from every page but
 // kept visually subordinate. We omit the link on the imprint page itself, where
@@ -40,21 +37,11 @@ const backgroundAvatar = await getImage({
 // the `site` origin configured in astro.config.mjs.
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-// Social preview image. Each page maps to a generated 1200x630 card at
-// /open-graph/<slug>.png (see src/pages/open-graph). A caller-supplied `image`
-// overrides it; unknown routes fall back to the homepage card.
-const slug = Astro.url.pathname.replace(/^\/+|\/+$/g, "") || "index";
-
-let ogImageSrc: string;
-let ogImageDimensions: { width: number; height: number } | undefined;
-if (image) {
-  ogImageSrc = image;
-} else {
-  const cardSlug = slug in pages ? slug : "index";
-  ogImageSrc = `/open-graph/${cardSlug}.png`;
-  ogImageDimensions = { width: 1200, height: 630 };
-}
-const ogImageURL = new URL(ogImageSrc, Astro.site);
+// Social preview image: one hand-made card for every page, served from
+// public/og.png. Its size goes into the tags so link previews can lay it out
+// before the image has loaded.
+const ogImageURL = new URL("/og.png", Astro.site);
+const ogImageDimensions = { width: 1280, height: 640 };
 
 // A portrait of the person, distinct from the OG banner above. Used as the
 // schema.org Person image, where a photo is the semantically correct choice.
@@ -95,14 +82,8 @@ const personSchema = {
     <meta property="og:site_name" content={profile.name} />
     <meta property="og:locale" content="en_US" />
     <meta property="og:image" content={ogImageURL.href} />
-    {
-      ogImageDimensions && (
-        <>
-          <meta property="og:image:width" content={String(ogImageDimensions.width)} />
-          <meta property="og:image:height" content={String(ogImageDimensions.height)} />
-        </>
-      )
-    }
+    <meta property="og:image:width" content={String(ogImageDimensions.width)} />
+    <meta property="og:image:height" content={String(ogImageDimensions.height)} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />

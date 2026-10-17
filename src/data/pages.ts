@@ -2,11 +2,8 @@
 // Per-page metadata
 // =========================================================
 //
-// Title and description for each page, single-sourced so the same strings
-// drive three consumers without drifting: the page's `<title>`/meta tags
-// (via BaseLayout), the OpenGraph card generated for that page, and the
-// canonical-to-card mapping. The keys match the OG route param, so
-// `/open-graph/<key>.png` is the social image for that page.
+// Title and description for each page, single-sourced so each page's
+// `<title>` and meta tags (via BaseLayout) read from one place.
 
 export interface PageMeta {
   title: string;
