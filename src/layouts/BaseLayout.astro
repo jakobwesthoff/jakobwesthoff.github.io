@@ -43,6 +43,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // previews can lay the card out before the image has loaded.
 const ogImageURL = new URL("/og.jpg", Astro.site);
 const ogImageDimensions = { width: 1280, height: 640 };
+const ogImageAlt =
+  "Jakob Westhoff, Software Architect by Day, Nerd by Night: his photo and handwritten motto on amber, beside previews of his projects jlif, TetroTime and Torchsnap glowing at night.";
 
 // A portrait of the person, distinct from the OG banner above. Used as the
 // schema.org Person image, where a photo is the semantically correct choice.
@@ -83,14 +85,17 @@ const personSchema = {
     <meta property="og:site_name" content={profile.name} />
     <meta property="og:locale" content="en_US" />
     <meta property="og:image" content={ogImageURL.href} />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content={String(ogImageDimensions.width)} />
     <meta property="og:image:height" content={String(ogImageDimensions.height)} />
+    <meta property="og:image:alt" content={ogImageAlt} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL.href} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
 
     <script type="application/ld+json" is:inline set:html={JSON.stringify(personSchema)} />
   </head>
