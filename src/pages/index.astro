@@ -49,9 +49,7 @@ const optimizedGazeSprite = await getImage({
         gazeSpriteWidth={optimizedGazeSprite.attributes.width}
         gazeSpriteHeight={optimizedGazeSprite.attributes.height}
       />
-      <div
-        class="absolute top-0 flex translate-x-15/32 -translate-y-1/2 flex-col sm:translate-x-6/8"
-      >
+      <div class="absolute top-0 flex translate-x-15/32 -translate-y-1/2 flex-col sm:translate-x-6/8">
         <Image src={sloganText} alt="" class="self-start sm:self-center" />
         <Image src={sloganArrow} alt="" class="self-end sm:self-center" />
       </div>
@@ -74,13 +72,11 @@ const optimizedGazeSprite = await getImage({
   <!-- Social links bar -->
   <div class="absolute bottom-4 left-1/2 -translate-x-1/2">
     <ul class="flex gap-6">
-      {
-        profile.social.map((link) => (
-          <li>
-            <SocialLink href={link.href} icon={link.icon} label={link.label} />
-          </li>
-        ))
-      }
+      {profile.social.map((link) => (
+        <li>
+          <SocialLink href={link.href} icon={link.icon} label={link.label} />
+        </li>
+      ))}
       <li>
         <EmailLink
           client:load
